@@ -1,0 +1,43 @@
+Problem Link - https://www.hackerrank.com/challenges/crush/problem?isFullScreen=true
+
+def arrayManipulation(n, queries):
+    array = [0] * (n + 1)
+    
+    for query in queries: 
+        a = query[0] - 1
+        b = query[1]
+        k = query[2]
+        array[a] += k
+        array[b] -= k
+        print(array)
+    
+    max = 0
+    sum = 0
+    for ele in array:
+        sum += ele
+        if sum > max:
+            max = sum
+    return max
+
+
+## Logic - 
+1. Brute force approach - successful by runtime error since constraints are very huge
+2. Pre Sum Approach
+* Make the array (n + 1) since we use zero based indexing
+* instead of updating all elements, update only the start and the next position after the end
+* start_pos += k and end_pos -= k ---> this subtraction makes sure when you take a running sum, you donot shoot beyond the end value, so -k reverses the effect
+* running sum and then take the max :)
+
+## Solid Example
+
+5 3
+1 2 100
+2 5 100
+3 4 100
+
+[0    0    0   0  0  0] #length 6 
+[100, 0, -100, 0, 0, 0] 
+[100, 100, -100, 0, 0, -100]
+[100, 100, 0, 0, -100, -100]
+
+
