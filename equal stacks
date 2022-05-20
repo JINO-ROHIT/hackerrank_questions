@@ -1,0 +1,23 @@
+Problem Link - https://www.hackerrank.com/challenges/equal-stacks/problem
+
+def equalStacks(h1, h2, h3):
+    
+    h1,h2,h3 = h1[::-1], h2[::-1], h3[::-1]  #reversing string
+    s1,s2,s3 = map(sum, (h1,h2,h3))
+    while h1 and h2 and h3:
+        m = min(s1, s2, s3)
+        while s1 > m : 
+            s1 -= h1.pop()
+        while s2 > m:
+            s2 -= h2.pop()
+        while s3 > m:
+            s3 -= h3.pop()
+        if s1 == s2 == s3 :
+            return s1
+    return 0
+
+Logic -
+* Find the smallest length among 3 stacks
+* Keep popping from the stacks until stack_len < smallest_value
+
+(we had to reverse the array to save time complexity since when you pop(0), the whole stack has to rearrange)
